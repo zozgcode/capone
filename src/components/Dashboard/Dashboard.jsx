@@ -86,7 +86,8 @@ export default function Dashboard() {
         </div>
         <div>
           <span>
-            <i className="fa fa-money" aria-hidden="true"></i>
+            {/* <i className="fa fa-money" aria-hidden="true"></i> */}
+            <i className="fa-solid fa-money-bill"></i>
           </span>
           <span>Pay</span>
         </div>
