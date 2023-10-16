@@ -1,0 +1,27 @@
+.header {
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border-bottom: 1px solid #cacaca;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.logo {
+  position: relative;
+  top: -4px;
+  height: 36px;
+  width: 103.5px;
+}
+.hamburger {
+  position: relative;
+  top: -4px;
+  display: none;
+}
+.hamburger div {
+  background-color: #fff;
+  width: 30px;
+  height: 2px;
+  margin: 5px;
+}
