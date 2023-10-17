@@ -103,7 +103,7 @@ export default function Dashboard() {
             <input type="text" />
           </div>
           <div>
-            <label>Amount (£)</label>
+            <label>Amount ($)</label>
             <input type="text" />
           </div>
           <div>
