@@ -1,6 +1,11 @@
 .login-page {
   display: none;
 }
+.error-message{
+  color: red;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
 @media screen and (max-width: 767px) {
   .login-page {
     display: block;

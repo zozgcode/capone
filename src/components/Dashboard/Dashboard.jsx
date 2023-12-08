@@ -4,10 +4,15 @@ import Modal from "@bdenzer/react-modal";
 // import creditCard from "../../assets/1617888734hh2iaLYuB1.png";
 import "./Dashboard.css";
 import HendrixEdwardBilly from "../AllUserTransactions/HendrixEdwardBilly";
+import CHendrixEdwardBilly from "../AllUserTransactions/CHendrixEdwardBilly";
 import logo from "../../assets/capital-one-logo.svg"
 
 export default function Dashboard() {
   const [shouldShowModal, setShouldShowModal] = useState(false);
+  const [recipientAccount, setRecipientAccount] = useState("");
+  const [amount, setAmount] = useState("");
+  const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("user")); // get the user data
@@ -24,6 +29,34 @@ export default function Dashboard() {
 
   const openModal = () => {
     setShouldShowModal(true);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate recipientAccount and amount
+    const newErrors = {};
+
+    if (!recipientAccount) {
+      newErrors.recipientAccount = "Recipient Account is required";
+    }
+
+    if (!amount) {
+      newErrors.amount = "Amount is required";
+    } else if (isNaN(amount)) {
+      newErrors.amount = "Amount must be a number";
+    }
+
+    if (Object.keys(newErrors).length === 0) {
+      // Submit the form if there are no errors
+      setSuccessMessage(
+        "You can't make a transaction at the moment, please contact the bank to fix this immediately."
+      );
+      setErrors({});
+    } else {
+      // Update the errors state with validation errors
+      setErrors(newErrors);
+    }
   };
   //   const { match } = props;
   return (
@@ -58,6 +91,7 @@ export default function Dashboard() {
         </div>
         <div className="transaction_container">
           {user.id === 1 && <HendrixEdwardBilly />}
+          {user.id === 2 && <CHendrixEdwardBilly />}
         </div>
       </div>
       {/* <div className="credit_card">
@@ -97,17 +131,47 @@ export default function Dashboard() {
         shouldShowModal={shouldShowModal}
         title="Transfer Fund"
       >
-        <form className="modal_form" onSubmit={(e) => e.preventDefault()}>
+         {successMessage && (
+          <div
+            style={{
+              color: "red",
+              padding: 5,
+              fontSize: "18px",
+              marginTop: 10,
+              marginBottom: 10,
+            }}
+          >
+            <i className="fa-solid fa-triangle-exclamation"></i>{" "}
+            {successMessage}
+          </div>
+        )}
+        <form className="modal_form" onSubmit={handleSubmit}>
           <div>
             <label>Recipient Account</label>
-            <input type="text" />
+            <input
+              type="number"
+              value={recipientAccount}
+              onChange={(e) => setRecipientAccount(e.target.value)}
+            />
+            {errors.recipientAccount && (
+              <div style={{ color: "red", marginTop: 10 }}>
+                {errors.recipientAccount}
+              </div>
+            )}
           </div>
           <div>
             <label>Amount ($)</label>
-            <input type="text" />
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
+            {errors.amount && (
+              <div style={{ color: "red", marginTop: 10 }}>{errors.amount}</div>
+            )}
           </div>
           <div>
-            <button onClick={() => closeModal()}>Transfer</button>
+            <button>Transfer</button>
           </div>
         </form>
       </Modal>

@@ -11,6 +11,7 @@ const Login = () => {
     user_id: "",
     user_password: "",
   });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const handleFormChange = (event) => {
     const loginParamsNew = { ...loginParams };
@@ -20,17 +21,24 @@ const Login = () => {
   };
 
   const login = (event) => {
+    event.preventDefault();
     const user_id = loginParams.user_id;
     const user_password = loginParams.user_password;
+
+    if (!user_id || !user_password) {
+      setError("All fields are required"); // Fields are empty error
+      return;
+    }
+
     for (let user of users) {
       if (user.username === user_id && user.password === user_password) {
         localStorage.setItem("token", "T");
-        localStorage.setItem("user", JSON.stringify(user)); // set the user data
+        localStorage.setItem("user", JSON.stringify(user));
         setIslogged(true);
         return;
       }
     }
-    event.preventDefault();
+    setError("Incorrect username or password"); // Set error message
   };
 
   useEffect(() => {
@@ -54,6 +62,7 @@ const Login = () => {
             </div>
             <p>Sign In</p>
           </div>
+          {error && <div className="error-message">{error}</div>}
           <form onSubmit={login} className="">
             <div className="form-group">
               <label className="control-label" style={{ color: "#141414" }}>
