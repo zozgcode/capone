@@ -3,8 +3,8 @@ const users = [
     id: 1,
     name: "Hendrix Edward Billy",
     cardName: "Hendrix Edward B.",
-    username: "Hendrixedwardbilly_dsjdsjdhsjhdsjdhs",
-    password: "Hendrixbill10_hshsdhsdhsjd",
+    username: "Hendrixedwardbilly",
+    password: "Hendrixbill10",
     amount: "99,000,000.00",
   },
   { 
