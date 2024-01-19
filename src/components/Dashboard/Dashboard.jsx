@@ -4,6 +4,7 @@ import Modal from "@bdenzer/react-modal";
 // import creditCard from "../../assets/1617888734hh2iaLYuB1.png";
 import "./Dashboard.css";
 import HendrixEdwardBilly from "../AllUserTransactions/HendrixEdwardBilly";
+import JessicaRebeccaAnderson from "../AllUserTransactions/JessicaRebeccaAnderson";
 import CHendrixEdwardBilly from "../AllUserTransactions/CHendrixEdwardBilly";
 import logo from "../../assets/capital-one-logo.svg"
 
@@ -92,6 +93,7 @@ export default function Dashboard() {
         <div className="transaction_container">
           {user.id === 1 && <HendrixEdwardBilly />}
           {user.id === 2 && <CHendrixEdwardBilly />}
+          {user.id === 3 && <JessicaRebeccaAnderson />}
         </div>
       </div>
       {/* <div className="credit_card">
